@@ -15,18 +15,20 @@ public class PaymentStatusServiceImpl implements paymentStatusService {
 	@Autowired
 	TransactionStatusFactory transactionStatusFactory; 
 	
+	
+
 	@Override
 	public Transaction updatePaymentStatus(Transaction transaction) {
 		// TODO Auto-generated method stub
 		System.out.println("invoked service class: updated payment status ");
 
-		TransactionStatusEnum statusEnum=TransactionStatusEnum.getTransactionStatusEnum( transaction.getTxnDetailsId());
-		
+		TransactionStatusEnum statusEnum=TransactionStatusEnum.getTransactionStatusEnum( transaction.getTxnStatusId());
+
 		//factory
 		TransactionStatusHandler statusHandler= transactionStatusFactory.getStatusHandler(statusEnum); 
-	boolean isupdated=	statusHandler.updateStatus(transaction);
-	System.out.println("status handler is |updated"+ isupdated +"|status Enum"+ statusEnum);
-		
+		boolean isupdated=	statusHandler.updateStatus(transaction);
+		System.out.println("status handler is |updated"+ isupdated +"|status Enum"+ statusEnum);
+
 		return transaction;
 	}
 
